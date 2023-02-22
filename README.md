@@ -18,6 +18,19 @@ It has:
   * Local on the native platform
   * And running on the boards
 
+
+# Making it work for you
+
+All changes are, hopefully, in platform.ini
+
+1. Change the serial id:s to your own:  
+`/dev/cu.wchusbserialNNNNNNNNN`  
+You'll find it in PIO Home - Devices  
+*(no, the serial ids of my test boards are hardly attack vectors)*
+2. Add your own board's configuration
+
+
+
 # Takeaways
 
 1. The build times are *very* different for the different platforms. 
@@ -26,3 +39,13 @@ It has:
 4. Config 
   * platformio.ini
     * Both Arduino and Native needs lib_extra_dirs = components
+    * Native need lib_compat_mode = off. 
+      I am have not found out why for sure. Any ideas?
+
+5. Start using the command line, unless you *really* like clicking
+  * `pio run` - Builds all
+  * `pio test` - Runs all tests
+  * `pio clean` won't work...but..
+  * `pio -t clean` and `pio -t cleanall` - Cleans all targets. 
+
+  
