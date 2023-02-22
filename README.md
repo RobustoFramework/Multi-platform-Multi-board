@@ -1,4 +1,4 @@
-# Multi-platform, multi-board and Platform IO 
+# Multi-platform, multi-board and PlatformIO 
 
 One of the many great things about PlatformIO is its ability to have projects  
 that build and run on several platforms simultaneously. This project does this.   
