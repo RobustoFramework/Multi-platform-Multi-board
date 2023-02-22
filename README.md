@@ -31,11 +31,11 @@ You'll find it in PIO Home - Devices
 
 
 
-# Takeaways
+# Tips & takeaways
 
 1. The build times are *very* different for the different platforms. 
-2. Arduino don't have to have a main.cpp
-3. Because we only need .cpp when we need c++ features
+2. Arduino don't have to have a main.cpp..
+3. ..because we only need .cpp when we need c++ features (like Serial.begin)
 4. Config 
   * platformio.ini
     * Both Arduino and Native needs lib_extra_dirs = components
