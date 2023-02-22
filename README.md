@@ -41,9 +41,9 @@ You'll find it in PIO Home - Devices
 2. Arduino don't have to have a main.cpp..
 3. ..because we only need .cpp when we need c++ features (like Serial.begin)
 4. Config 
-  * platformio.ini
+  * `platformio.ini`
     * Both Arduino and Native needs lib_extra_dirs = components
-    * Native need lib_compat_mode = off. 
+    * Native platform need `lib_compat_mode = off`.  
       I am have not found out why for sure. Any ideas?
 
 5. Start using the command line, unless you *really* like clicking
