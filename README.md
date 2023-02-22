@@ -1,10 +1,9 @@
 # Multi-platform, multi-board and Platform IO 
 
-One of the great things about PlatformIO is its ability to have projects that  
-build and run on several plattforms simultaneously.
+One of the many great things about PlatformIO is its ability to have projects  
+that build and run on several platforms simultaneously. This project does this.   
 
-Demonstrating this, and providing a starting point for those who need it,  
-this project runs on:
+It provides a starting point for those who need it and runs on:
 * Platforms
   * Native
   * ESP-IDF
@@ -38,9 +37,9 @@ You'll find it in PIO Home - Devices
 # Tips & takeaways
 
 1. The build times are *very* different for the different platforms. 
-2. Arduino don't have to have a main.cpp..
+2. Arduino don't have to have a `main.cpp`..
 3. ..because we only need .cpp when we need c++ features  
-   ..like `Serial.begin(9600)` for Arduino to be able to log.
+   like `Serial.begin(9600)` for Arduino to be able to log.
 4. Config 
   * `platformio.ini`
     * Both Arduino and Native needs lib_extra_dirs = components
