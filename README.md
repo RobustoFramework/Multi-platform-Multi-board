@@ -1,8 +1,10 @@
 # Multi-platform, multi-board and Platform IO 
 
-One of the great things about PlatformIO is its ability to have projects that build and run on several plattforms simultaneously.
+One of the great things about PlatformIO is its ability to have projects that  
+build and run on several plattforms simultaneously.
 
-This project runs on:
+Demonstrating this, and providing a starting point for those who need it,  
+this project runs on:
 * Platforms
   * Native
   * ESP-IDF
@@ -10,10 +12,11 @@ This project runs on:
 * Hardware
   * PC (Linux/MacOs/Windows)
   * LILYGO® TTGO LoRa32 V1.0
-  * T-Beam Meshtastic V1.1 ESP32 LoRa SX1276/SX1278 , Arduino Uno Rev3
+  * T-Beam Meshtastic V1.1 ESP32 LoRa SX1276/SX1278
+  * Arduino Uno Rev3
 
 It has:
-* One runnable main.c for all platforms
+* *One* runnable main.c for all platforms
 * Unit testing
   * Local on the native platform
   * And running on the boards
@@ -27,7 +30,8 @@ All changes are, hopefully, in platform.ini
 `/dev/cu.wchusbserialNNNNNNNNN`  
 You'll find it in PIO Home - Devices  
 *(no, the serial ids of my test boards are hardly attack vectors)*
-2. Add your own board's configuration
+2. Add your own board's configuration in an `[env:yourboard]`-section
+3. Go do great things!
 
 
 
