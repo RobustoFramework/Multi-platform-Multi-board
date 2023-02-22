@@ -1,6 +1,7 @@
 # DEVELOPMENT
 
-This folder is meant to contains the templates and tools needed for Robusto development.
+This folder is meant to contains the templates and tools needed for Robusto development.  
+*(In this case, it is taken from the Robusto template project at some time, so they might be out of date, you might want to either update or make your own rules)*
 
 ## Templates
 
