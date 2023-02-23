@@ -7,7 +7,7 @@ In the latter case, please beging at https://docs.platformio.org/en/stable/tutor
 # Multi-platform, multi-board and PlatformIO 
 
 One of the many great things about PlatformIO is its ability to have projects  
-that build and run on several platforms simultaneously. This project does this.   
+that build and run on several platforms simultaneously. This shows how this is done.   
 
 It provides a starting point for those who need it and runs on:
 * Platforms
@@ -57,5 +57,5 @@ You'll find it in PIO Home - Devices
   * `pio test` - Runs all tests
   * `pio clean` won't work...but..
   * `pio -t clean` and `pio -t cleanall` - Cleans all targets. 
-
+6. There is a /development folder, take a look.
   
