@@ -66,7 +66,7 @@ note over App: App continues
 </td>
 <td>
 
-```
+````
 ```mermaid 
 sequenceDiagram
 participant App as Application
@@ -93,7 +93,9 @@ RI ->> App: Robusto is initated
 note over App: App continues
 ```
 
+````
 </td>
 
 </tr>
 </table>
+As a twofer, in the raw source, you also get to learn how to escape a triple backtick. :-)
