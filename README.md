@@ -1,3 +1,9 @@
+
+*DISCLAIMER  
+This is a kind of advanced setup and will very hard be hard to keep on track for a newbie.  
+So it  not for people just starting out with C/C++ or microprocessor programming or Platform IO.  
+In the latter case, please beging at https://docs.platformio.org/en/stable/tutorials/index.html and try out some easier stuff first.*
+
 # Multi-platform, multi-board and PlatformIO 
 
 One of the many great things about PlatformIO is its ability to have projects  
