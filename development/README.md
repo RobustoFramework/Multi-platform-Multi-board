@@ -52,10 +52,10 @@ RI ->> Mon: Monitors start running
 activate Mon
 RI -) MW : Start each media worker
 activate MW
-MW ->> MW: Media workers create outgoing queues locked
-MW ->> MW: Media workers start listening\nfor messages
-MW ->> MW: Media workers unlocks outgoing queues
-RI ->>SW : All services and their workers start up
+MW ->> MW: Media workers create outgoing<br/>queues locked
+MW ->> MW: Media workers start listening<br/>for messages
+MW ->> MW: Media workers unlocks outgoing<br/> queues
+RI ->>SW : All services and their workers<br/> start up
 activate SW
 RI ->> AW: App worker starts accepting incoming
 activate AW
@@ -82,10 +82,10 @@ RI ->> Mon: Monitors start running
 activate Mon
 RI -) MW : Start each media worker
 activate MW
-MW ->> MW: Media workers create outgoing queues locked
-MW ->> MW: Media workers start listening\nfor messages
-MW ->> MW: Media workers unlocks outgoing queues
-RI ->>SW : All services and their workers start up
+MW ->> MW: Media workers create outgoing<br/>queues locked
+MW ->> MW: Media workers start listening<br/>for messages
+MW ->> MW: Media workers unlocks outgoing<br/> queues
+RI ->>SW : All services and their workers<br/> start up
 activate SW
 RI ->> AW: App worker starts accepting incoming
 activate AW
