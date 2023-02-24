@@ -16,8 +16,8 @@ It provides a starting point for those who need it and runs on:
   * Arduino
 * Hardware
   * PC (Linux/MacOs/Windows)
-  * LILYGO® TTGO LoRa32 V1.0
-  * T-Beam Meshtastic V1.1 ESP32 LoRa SX1276/SX1278
+  * LILYGO® TTGO LoRa32 V1.0 SX1276/SX1278
+  * LILYGO® TTGO T-Beam V1.1 ESP32 LORA SX1262
   * Arduino Uno Rev3
 
 It has:
