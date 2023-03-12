@@ -56,6 +56,6 @@ You'll find it in PIO Home - Devices
   * `pio run` - Builds all
   * `pio test` - Runs all tests
   * `pio clean` won't work...but..
-  * `pio -t clean` and `pio -t cleanall` - Cleans all targets. 
+  * `pio run -t clean` and `pio run -t cleanall` - Cleans all targets. 
 6. There is a /development folder, take a look.
   
