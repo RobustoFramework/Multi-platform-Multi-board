@@ -1,7 +1,7 @@
 /**
- * @file init_native.c
+ * @file log_native.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Initialization for the native platform (host). 
+ * @brief Logging implementation for the native platform (host). 
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -31,11 +31,16 @@
 
 #if !(defined(ARDUINO) || defined(ESP_PLATFORM))
 
-#include "robusto_init.h"
-#include "robusto_time.h"
+#include "robusto_logging.h"
+#if ROB_LOG_LOCAL_LEVEL > ROB_LOG_NONE 
+#include <stdio.h>
 
-void robusto_init_compatibility() {
-    r_init_time();
+void compat_log_writev(rob_log_level_t level, const char* tag, const char* format, va_list args) {
+
+    vprintf(format, args);
+
 }
+#endif
+void r_init_logging() {};
 
 #endif

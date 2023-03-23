@@ -1,7 +1,7 @@
 /**
- * @file logging_arduino.cpp
+ * @file init_esp-idf.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Logging implementation for the Arduino platform. 
+ * @brief Robusto initialization for the ESP-IDF platform. 
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -28,21 +28,13 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-#ifdef ARDUINO
 
-#include <Arduino.h>
-#include <stdio.h>
-#include <robusto_logging.h>
+#ifdef ESP_PLATFORM
 
+#include "robusto_init.h"
 
-void compat_log_writev(rob_log_level_t level, const char* tag, const char* format, va_list args) {
-    char msg[1000];
-    vsprintf(msg, format, args);
-    Serial.println(msg);
-}
-
-void r_init_logging() {
-    Serial.begin(9600);
+void robusto_init_compatibility() {
+    // TODO: Add ESP-IDF initalization here.
 }
 
 #endif

@@ -1,7 +1,7 @@
 /**
- * @file time_esp-idf.c
+ * @file init_arduino.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Time functions - esp-idf
+ * @brief Robust initialization for the Arduino platform. 
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -29,25 +29,14 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifdef ESP_PLATFORM
-
-#include "robusto_time.h"
-#include <freertos/FreeRTOS.h>
-#include <freertos/task.h>
-#include <esp_timer.h>
+#ifdef ARDUINO
 
 
-unsigned long r_millis() {
-    return esp_timer_get_time()/1000;
+#include "robusto_init.h"
+#include "robusto_logging.h"
+
+void robusto_init_compatibility() {
+    r_init_logging();
 }
- 
-void r_delay(unsigned long milliseconds)
-{
-
-    vTaskDelay(milliseconds);
-}
-
-void r_init_time() {
-};
 
 #endif

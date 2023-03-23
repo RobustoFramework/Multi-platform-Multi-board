@@ -1,7 +1,7 @@
 /**
- * @file logging_robusto.c
+ * @file time_native.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Logging functionality. 
+ * @brief The Robusto time functionality for the native platform (Linux/Windows/MacOS).
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -29,16 +29,34 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "robusto_logging.h"
-#include <stdarg.h>
+#if !(defined(ARDUINO) || defined(ESP_PLATFORM))
 
-void rob_log_write(rob_log_level_t level,
-                   const char *tag,
-                   const char *format, ...)
+#include <robusto_time.h>
+#include <time.h>
+#include <stdint.h>
+#include <unistd.h>
+
+static clock_t proc_start;
+
+unsigned long r_millis() {
+    return (clock() - proc_start) * 1000 / CLOCKS_PER_SEC;
+}
+ 
+void r_delay(unsigned long milliseconds)
 {
-    va_list list;
-    va_start(list, format);
-    compat_log_writev(level, tag, format, list);
-    va_end(list);
+
+    // Storing start time
+    clock_t start_time = clock();
+    unsigned long delay = milliseconds * CLOCKS_PER_SEC/ 1000;
+ 
+    // looping till required time is not achieved
+    while (clock() < start_time + delay) {
+        usleep(10);
+    };
 }
 
+void r_init_time() {
+    proc_start = clock();
+};
+
+#endif

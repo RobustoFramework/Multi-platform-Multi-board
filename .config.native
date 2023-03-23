@@ -1,0 +1,14 @@
+
+#
+# Base system configuration
+#
+CONFIG_ROB_SRAM_BYTES=0
+# CONFIG_ROB_NO_RTOS is not set
+# CONFIG_ROB_LOG_LEVEL_NONE is not set
+# CONFIG_ROB_LOG_LEVEL_ERROR is not set
+# CONFIG_ROB_LOG_LEVEL_WARN is not set
+CONFIG_ROB_LOG_LEVEL_INFO=y
+# CONFIG_ROB_LOG_LEVEL_DEBUG is not set
+# CONFIG_ROB_LOG_LEVEL_VERBOSE is not set
+CONFIG_LOG_MAXIMUM_LEVEL=3
+# end of Base system configuration

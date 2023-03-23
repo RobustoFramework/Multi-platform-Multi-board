@@ -1,7 +1,7 @@
 /**
- * @file init_esp-idf.c
+ * @file init_robusto.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Initialization for the ESP-IDF platform. 
+ * @brief Initialization for Robusto. 
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -29,12 +29,11 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifdef ESP_PLATFORM
-
 #include "robusto_init.h"
-
-void robusto_init_compatibility() {
-    // TODO: Add ESP-IDF initalization here.
+#include "robusto_system.h"
+void init_robusto(){
+    // TODO: Add all general initialization here.
+    
+    robusto_system_init("Robusto");
+    robusto_init_compatibility();
 }
-
-#endif

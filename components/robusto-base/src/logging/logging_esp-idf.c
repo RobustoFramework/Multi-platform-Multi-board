@@ -1,7 +1,7 @@
 /**
- * @file time_arduino.c
+ * @file log_esp-idf.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Time functions - arduino
+ * @brief Logging implementation for the ESP-IDF platform.
  * @version 0.1
  * @date 2023-02-19
  *
@@ -29,26 +29,19 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#ifdef ARDUINO
+#ifdef ESP_PLATFORM
+#include <robusto_logging.h>
+#if ROB_LOG_LOCAL_LEVEL > ROB_LOG_NONE 
+#include <esp_log.h>
 
-#include "Arduino.h"
 
-#include "robusto_time.h"
-/**
- * @brief 
- * @note 
- * @return long long
- */
-unsigned long r_millis()
+void compat_log_writev(rob_log_level_t level, const char *tag, const char *format, va_list args)
 {
-    return millis();
+
+    esp_log_writev(level, tag, format, args);
+
 }
 
-void r_delay(unsigned long  milliseconds)
-{
-    delay(milliseconds);
-}
-
-void r_init_time(){};
-
+#endif
+void r_init_logging(){};
 #endif

@@ -1,0 +1,63 @@
+# Kconfig file for Robusto v0.1.0
+  
+menu "Base system configuration"
+
+    config ROB_SRAM_BYTES
+        int "Available SRAM in bytes (0=No limit)"
+        default 0
+        help
+            This setting is to help development for boards with small amounts of SRAM.
+            The Arduino Uno, for example, have 2000 bytes and the ATTiny85 only 512, so it can only run the most essential parts of Robusto.
+            If this is set to a nonzero value, some tests may be exempted if they are known to frequently require more memory than ROB_SRAM_BYTES.
+            Robusto will also show relevant compiler warnings for the same reason. 
+    config ROB_NO_RTOS
+        bool "Do not use RTOS features"
+        default false
+        help
+            Concurrency, queues and other complex RTOS-features use significant resources. And while adding stability and other
+            positive aspects, it may also cause longer response times. 
+            So to also work when memory or processing power are scarce, or response times very important, this is possible to disable in Robusto.
+            NOTE: If true, it means that the Robusto Broker and other services are unable to run on this board.
+    choice LOG_MAXIMUM_LEVEL
+        prompt "Maximum log level"
+        default ROB_LOG_LEVEL_INFO
+        help
+            Select the maximum log level, nothing below this will be sent to output.
+        config ROB_LOG_LEVEL_NONE
+            bool "NONE"
+            help
+                No log output will be written.
+                I will also change the logging to use empty dummy implementations for logging in general, minimizing memory usage. 
+        config ROB_LOG_LEVEL_ERROR
+            bool "ERROR"
+            help
+                Only write critical errors, that the system can not recover from.
+        config ROB_LOG_LEVEL_WARN
+            bool "WARN"
+            help
+                Report warnings, that something has gone wrong but has been handled, or might get worse.
+        config ROB_LOG_LEVEL_INFO
+            bool "INFO"
+            help
+                Write information messages which describe normal flow of events. 
+        config ROB_LOG_LEVEL_DEBUG
+            bool "DEBUG"
+            help
+                Write debugging information, useful when troubleshooting and debugging
+        config ROB_LOG_LEVEL_VERBOSE
+            bool "VERBOSE"
+            help
+                Even more detailed debugging information, often with memory dumps and large amounts of information. 
+    endchoice                                        
+
+    config LOG_MAXIMUM_LEVEL
+        int
+        default 0 if ROB_LOG_LEVEL_NONE
+        default 1 if ROB_LOG_LEVEL_ERROR
+        default 2 if ROB_LOG_LEVEL_WARN
+        default 3 if ROB_LOG_LEVEL_INFO
+        default 4 if ROB_LOG_LEVEL_DEBUG
+        default 5 if ROB_LOG_LEVEL_VERBOSE
+endmenu                    
+
+

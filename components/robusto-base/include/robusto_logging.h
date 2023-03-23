@@ -4,12 +4,12 @@
  * @brief Logging functionality.
  * @note The functional interface is modeled after the ESP-IDF ESP-LOG functionality.
  * It implements some of the functionality, but not all.
- * see: https://github.com/espressif/esp-idf/blob/master/components/log/include/esp_log.h
+ * see: https://github.com/espressif/esp-idf/blob/master/components/log/include/robusto_logging.h
  * @version 0.1
  * @date 2023-02-19
  *
  * @copyright
- * Copyright (c) 2022, Nicklas Börjesson <nicklasb at gmail dot com>
+ * Copyright (c) 2023, Nicklas Börjesson <nicklasb at gmail dot com>
  * All rights reserved.
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
@@ -39,19 +39,10 @@ extern "C"
 {
 #endif
 
-#include <stdarg.h>
-
-#include "robusto_time.h"
-// TODO: There are lots of conditions wrt bootloaders and so on in esp_log.h, see if they are affected.
-
-// TODO: Figure out how and when to do coloring
-
-#ifdef ESP_PLATFORM
-#include <sdkconfig.h>
-#endif
+#include <robconfig.h>
+#define ROB_LOG_LOCAL_LEVEL CONFIG_LOG_MAXIMUM_LEVEL
 
 
-#define ROB_LOG_DO_FORMAT 1
 /**
  * @brief Log level
  */
@@ -65,18 +56,32 @@ typedef enum
     ROB_LOG_VERBOSE /*!< Bigger chunks of debugging information, or frequent messages which can potentially flood the output. */
 } rob_log_level_t;
 
-#ifndef ESP_PLATFORM
-    // Set info as default level for native platform. 
-    #define CONFIG_LOG_MAXIMUM_LEVEL ROB_LOG_INFO
-#endif
-#define ROB_LOG_LOCAL_LEVEL CONFIG_LOG_MAXIMUM_LEVEL
+#include <stdint.h>
+
+#if ROB_LOG_LOCAL_LEVEL > ROB_LOG_NONE
+#include "robusto_time.h"
+#include <stdarg.h>
+
+
+
+// TODO: There are lots of conditions wrt bootloaders and so on in robusto_logging.h, see if they are affected.
+
+// TODO: Figure out how and when to do coloring
+
+
+#define ROB_LOG_DO_FORMAT 1
+
+
+void test_write(const char * msg);
 
 void rob_log_write(rob_log_level_t level, const char *tag, const char *format, ...) __attribute__((format(printf, 3, 4)));
 
 void compat_log_writev(rob_log_level_t level, const char* tag, const char* format, va_list args);
+
+#endif
 void r_init_logging();
 
-/* Selection of colors from esp_log.h*/
+/* Selection of colors from robusto_logging.h*/
 #define ROB_LOG_COLOR_BLACK "30"
 #define ROB_LOG_COLOR_RED "31"
 #define ROB_LOG_COLOR_GREEN "32"
@@ -92,6 +97,7 @@ void r_init_logging();
 #define ROB_LOG_COLOR_I ROB_LOG_COLOR(ROB_LOG_COLOR_GREEN)
 #define ROB_LOG_COLOR_D
 #define ROB_LOG_COLOR_V
+#if ROB_LOG_LOCAL_LEVEL > ROB_LOG_NONE      
 
 #if ROB_LOG_DO_FORMAT == 1
 #define ROB_LOG_FORMAT(letter, format) ROB_LOG_COLOR_##letter #letter " (%lu) %s: " format ROB_LOG_RESET_COLOR "\n"
@@ -101,7 +107,7 @@ void r_init_logging();
 
 #define ROB_LOG_LEVEL(level, tag, format, ...)                                                                       \
     do                                                                                                               \
-    {                                                                                                                \
+    {                                                                                             \
         if (level == ROB_LOG_ERROR)                                                                                  \
         {                                                                                                            \
             rob_log_write(ROB_LOG_ERROR, tag, ROB_LOG_FORMAT(E, format), r_millis(), tag, ##__VA_ARGS__);   \
@@ -121,8 +127,9 @@ void r_init_logging();
         else                                                                                                         \
         {                                                                                                            \
             rob_log_write(ROB_LOG_INFO, tag, ROB_LOG_FORMAT(I, format), r_millis(), tag, ##__VA_ARGS__);    \
-        }                                                                                                            \
-    } while (0)
+        }    \
+                                                                                                      \
+    } while (0)\
 
 /** runtime macro to output logs at a specified level. Also check the level with ``LOG_LOCAL_LEVEL``.
  *
@@ -134,12 +141,26 @@ void r_init_logging();
         if (ROB_LOG_LOCAL_LEVEL >= level)                     \
             ROB_LOG_LEVEL(level, tag, format, ##__VA_ARGS__); \
     } while (0)
-
 #define ROB_LOGE(tag, format, ...) ROB_LOG_LEVEL_LOCAL(ROB_LOG_ERROR, tag, format, ##__VA_ARGS__)
 #define ROB_LOGW(tag, format, ...) ROB_LOG_LEVEL_LOCAL(ROB_LOG_WARN, tag, format, ##__VA_ARGS__)
 #define ROB_LOGI(tag, format, ...) ROB_LOG_LEVEL_LOCAL(ROB_LOG_INFO, tag, format, ##__VA_ARGS__)
 #define ROB_LOGD(tag, format, ...) ROB_LOG_LEVEL_LOCAL(ROB_LOG_DEBUG, tag, format, ##__VA_ARGS__)
 #define ROB_LOGV(tag, format, ...) ROB_LOG_LEVEL_LOCAL(ROB_LOG_VERBOSE, tag, format, ##__VA_ARGS__)
+#else
+#define ROB_LOGE(tag, format, ...) do {} while (0)
+#define ROB_LOGW(tag, format, ...) do {} while (0)
+#define ROB_LOGI(tag, format, ...) do {} while (0)
+#define ROB_LOGD(tag, format, ...) do {} while (0)
+#define ROB_LOGV(tag, format, ...) do {} while (0)
+
+
+#endif  
+
+void rob_log_bit_mesh(rob_log_level_t level,
+                   const char *tag,
+                   uint8_t * data, int data_len);
+
+
 
 #ifdef __cplusplus
 } /* extern "C" */

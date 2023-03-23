@@ -1,7 +1,7 @@
 /**
- * @file init_arduino.c
+ * @file logging_arduino.cpp
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Initialization for the ESP-IDF platform. 
+ * @brief Logging implementation for the Arduino platform. 
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -28,15 +28,34 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
-
 #ifdef ARDUINO
+#include <robusto_logging.h>
+#if ROB_LOG_LOCAL_LEVEL > ROB_LOG_NONE  
+#include <Arduino.h>
+#include <stdio.h>
 
 
-#include "robusto_init.h"
-#include "robusto_logging.h"
 
-void robusto_init_compatibility() {
-    r_init_logging();
+void test_write(const char * msg) {
+    Serial.println(msg);
+}
+
+void compat_log_writev(rob_log_level_t level, const char* tag, const char* format, va_list args) {
+    
+    char msg[128];
+    vsprintf(msg, format, args);
+    Serial.println(msg);
+
+}
+#endif
+void r_init_logging() {
+#if ROB_LOG_LOCAL_LEVEL > ROB_LOG_NONE  
+    Serial.begin(9600);
+    while (!Serial) {
+    ; // wait for serial port to connect. Needed for native USB, on LEONARDO, MICRO, YUN, and other 32u4 based boards.
+    }
+    Serial.print("Robusto initiated serial communication for Arduino.\n");
+#endif
 }
 
 #endif

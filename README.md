@@ -25,7 +25,7 @@ It has:
 * Unit testing
   * Local on the native platform
   * And running on the boards
-
+* a [Kconfig implementation](development/README.md#kconfig-config) to help you hold your config even if you don't use ESP-IDF.
 
 # Making it work for you
 
@@ -52,10 +52,6 @@ You'll find it in PIO Home - Devices
     * Native platform need `lib_compat_mode = off`.  
       I am have not found out why for sure. Any ideas?
 
-5. Start using the command line, unless you *really* like clicking
-  * `pio run` - Builds all
-  * `pio test` - Runs all tests
-  * `pio clean` won't work...but..
-  * `pio run -t clean` and `pio run -t cleanall` - Cleans all targets. 
+5. If you want a command run in all environments, look in the "General" project task group. 
 6. There is a /development folder, take a look.
   

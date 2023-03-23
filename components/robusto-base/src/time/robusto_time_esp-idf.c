@@ -1,7 +1,7 @@
 /**
- * @file init_robusto.c
+ * @file time_esp-idf.c
  * @author Nicklas Börjesson (nicklasb@gmail.com)
- * @brief Initialization for Robusto. 
+ * @brief The Robusto time functionality for ESP-IDF
  * @version 0.1
  * @date 2023-02-19
  * 
@@ -29,9 +29,24 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include "robusto_init.h"
+#ifdef ESP_PLATFORM
 
-void init_robusto(){
-    // TODO: Add all general initialization here.
-    robusto_init_compatibility();
+#include <robusto_time.h>
+#include <freertos/FreeRTOS.h>
+#include <freertos/task.h>
+#include <esp_timer.h>
+
+
+unsigned long r_millis() {
+    return esp_timer_get_time()/1000;
 }
+ 
+void r_delay(unsigned long milliseconds)
+{
+    vTaskDelay(milliseconds/portTICK_PERIOD_MS);
+}
+
+void r_init_time() {
+};
+
+#endif
