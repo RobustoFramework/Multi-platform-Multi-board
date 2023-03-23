@@ -116,7 +116,7 @@ Like ESP-IDF, it uses kconfiglib (`pip install kconfiglib`), which installs all 
 It is a bit less intelligent than ESP-IDF, as it doesn't automatically look through the project for Kconfig-files. 
 Also, it could be smarter about a few stuff. 
 
-Anyway, it adds, Kconfigs to both Native and Arduino in my project (ESP-IDF obviously already has it). It adds itself automatically, it might work with more frameworks.
+Anyway, it adds Kconfigs to both Native and Arduino in my project (ESP-IDF obviously already has it). It adds itself automatically, it might work with more frameworks.
 As I don’t control the Arduino and Native platforms, It isn’t the most elegant as I need extra_scripts .
 Neither it is the most intelligent, as it doesn’t look for Kconfigs everywhere like ESP-IDF. So far though, my configs all orsource each other, so it doesn’t matter. But for it to be general, that would have to be added.
 
