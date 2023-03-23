@@ -111,13 +111,17 @@ As a twofer, in the raw source, you also get to learn how to escape a triple bac
 # KConfig-config
 KConfig is a tool for keeping track of the configurations of a project. 
 ESP-IDF uses it to great effect, so why not use it?
-It uses kconfiglib (`pip install kconfiglib`), which installs all of the tools.
 
-Here, Kconfigs to both Native and Arduino in my project (ESP-IDF obviously already has it). It adds itself automatically, it might work with more frameworks.
+Like ESP-IDF, it uses kconfiglib (`pip install kconfiglib`), which installs all of the tools.
+It is a bit less intelligent than ESP-IDF, as it doesn't automatically look through the project for Kconfig-files. 
+Also, it could be smarter about a few stuff. 
+
+Anyway, it adds, Kconfigs to both Native and Arduino in my project (ESP-IDF obviously already has it). It adds itself automatically, it might work with more frameworks.
 As I don’t control the Arduino and Native platforms, It isn’t the most elegant as I need extra_scripts .
 Neither it is the most intelligent, as it doesn’t look for Kconfigs everywhere like ESP-IDF. So far though, my configs all orsource each other, so it doesn’t matter. But for it to be general, that would have to be added.
 
-It has the following scripts and templates, and they are in the [env] extra_scripts, hence called by all environments:
+It has the following scripts and templates, and they are in the platformio.ini:s [env] extra_scripts.<br/>
+Hence it is called by all environments in this fashion:
 
 - `scripts/init_env.py`<br/>
 If the framework isn’t ESP-IDF, it adds a “Run Menuconfig” project task to the current environment.
